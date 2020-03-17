@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.pethospitalmanagement.mapper.SeeDoctorMapper" >
+  <resultMap id="BaseResultMap" type="com.example.pethospitalmanagement.entity.SeeDoctor" >
+    <id column="seeDoctorId" property="seedoctorid" jdbcType="VARCHAR" />
+    <result column="doctorId" property="doctorid" jdbcType="INTEGER" />
+    <result column="doctorName" property="doctorname" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="petName" property="petname" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="doctorTime" property="doctortime" jdbcType="TIMESTAMP" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="evaluation" property="evaluation" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseResultMap2" type="com.example.pethospitalmanagement.vo.SeeDoctorVo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="petName" property="petname" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="evaluation" property="evaluation" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="serveType" property="serveType" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    seeDoctorId, doctorId, doctorName, userId, userName, petName, phone, doctorTime, createTime, details,
+    state, evaluation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_seedoctor
+    where seeDoctorId = #{seedoctorid,jdbcType=VARCHAR}
+    order by createTime desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_seedoctor
+    where seeDoctorId = #{seedoctorid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.pethospitalmanagement.entity.SeeDoctor" >
+    insert into t_seedoctor (seeDoctorId, doctorId, doctorName,
+      userId, userName, petName, phone,
+      doctorTime, createTime, details, state,
+      evaluation)
+    values (#{seedoctorid,jdbcType=VARCHAR}, #{doctorid,jdbcType=INTEGER}, #{doctorname,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{petname,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{doctortime,jdbcType=TIMESTAMP},  #{createtime,jdbcType=TIMESTAMP},
+      #{details,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{evaluation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pethospitalmanagement.entity.SeeDoctor" >
+    insert into t_seedoctor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seedoctorid != null" >
+        seeDoctorId,
+      </if>
+      <if test="doctorid != null" >
+        doctorId,
+      </if>
+      <if test="doctorname != null" >
+        doctorName,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="petname != null" >
+        petName,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="doctortime != null" >
+        doctorTime,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seedoctorid != null" >
+        #{seedoctorid,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorid != null" >
+        #{doctorid,jdbcType=INTEGER},
+      </if>
+      <if test="doctorname != null" >
+        #{doctorname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="petname != null" >
+        #{petname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="doctortime != null" >
+        #{doctortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pethospitalmanagement.entity.SeeDoctor" >
+    update t_seedoctor
+    <set >
+      <if test="doctorid != null" >
+        doctorId = #{doctorid,jdbcType=INTEGER},
+      </if>
+      <if test="doctorname != null" >
+        doctorName = #{doctorname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="petname != null" >
+        petName = #{petname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="doctortime != null" >
+        doctorTime = #{doctortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seeDoctorId = #{seedoctorid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pethospitalmanagement.entity.SeeDoctor" >
+    update t_seedoctor
+    set doctorId = #{doctorid,jdbcType=INTEGER},
+      doctorName = #{doctorname,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      userName = #{username,jdbcType=VARCHAR},
+      petName = #{petname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      doctorTime = #{doctortime,jdbcType=TIMESTAMP},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      details = #{details,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where seeDoctorId = #{seedoctorid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateSeeDoctorEvaluation" parameterType="com.example.pethospitalmanagement.entity.SeeDoctor" >
+    update t_seedoctor
+    <set>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluation != null" >
+        evaluation = #{evaluation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seeDoctorId = #{seedoctorid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectAllMessage" resultMap="BaseResultMap2">
+    select * from (
+      select
+      seeDoctorId id, petName, phone, evaluation, userName, '就诊' serveType, createTime
+      from t_seedoctor
+      where 1 = 1
+        and evaluation is not null
+        and state = '已完成'
+      union all
+      select
+      fosterId id, petName, phone, evaluation, userName,'预约' serveType, createTime
+      from t_fostercare
+      where 1 = 1
+        and evaluation is not null
+        and state = '已完成'
+    ) a
+    where 1 = 1
+    order by a.createTime desc
+  </select>
+  <select id="selectAllSeeDoctorByPrimaryKeySelective" resultMap="BaseResultMap" parameterType="com.example.pethospitalmanagement.vo.SeeDoctorVo" >
+    select
+    <include refid="Base_Column_List" />
+    from t_seedoctor
+    where 1 = 1
+    <if test="doctorid != null" >
+      and doctorId = #{doctorid,jdbcType=INTEGER}
+    </if>
+    <if test="doctorname != null" >
+      and doctorName like "%"#{doctorname,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="userid != null" >
+      and userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="username != null" >
+      and userName = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null" >
+      and phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="seedoctorid != null" >
+      and seeDoctorId like "%"#{seedoctorid,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="petname != null" >
+      and petName like "%"#{petname,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="doctorTime_s != null" >
+      and doctorTime >= #{doctorTime_s,jdbcType=TIMESTAMP}
+    </if>
+    <if test="doctorTime_e != null" >
+      and doctorTime <![CDATA[<=]]> date_add(#{doctorTime_e,jdbcType=TIMESTAMP},interval 1 day)
+    </if>
+    <if test="createTime_s != null" >
+      and createTime >= #{createTime_s,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createTime_e != null" >
+      and createTime <![CDATA[<=]]> date_add(#{createTime_e,jdbcType=TIMESTAMP},interval 1 day)
+    </if>
+    <if test="details != null" >
+      and details like "%"#{details,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="state != null" >
+      and state = #{state,jdbcType=VARCHAR}
+    </if>
+    order by createTime desc
+  </select>
+</mapper>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.pethospitalmanagement.mapper.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.example.pethospitalmanagement.entity.Log" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="logId" property="logid" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="logType" property="logtype" jdbcType="VARCHAR" />
+    <result column="requestIp" property="requestip" jdbcType="VARCHAR" />
+    <result column="exceptionCode" property="exceptioncode" jdbcType="VARCHAR" />
+    <result column="exceptionDetail" property="exceptiondetail" jdbcType="VARCHAR" />
+    <result column="createBy" property="createby" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, logId, description, method, logType, requestIp, exceptionCode, exceptionDetail, createBy,
+    createDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_log
+    where logId = #{logid,jdbcType=VARCHAR}
+    order by createDate desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_log
+    where logId = #{logid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.pethospitalmanagement.entity.Log" >
+    insert into t_log (id, logId, description, method,
+      logType, requestIp, exceptionCode, 
+      exceptionDetail, createBy, createDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{logid,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+     #{method,jdbcType=VARCHAR}, #{logtype,jdbcType=VARCHAR}, #{requestip,jdbcType=VARCHAR},
+     #{exceptioncode,jdbcType=VARCHAR}, #{exceptiondetail,jdbcType=VARCHAR},
+     #{createby,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pethospitalmanagement.entity.Log" >
+    insert into t_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logid != null" >
+        logId,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="logtype != null" >
+        logType,
+      </if>
+      <if test="requestip != null" >
+        requestIp,
+      </if>
+      <if test="exceptioncode != null" >
+        exceptionCode,
+      </if>
+      <if test="exceptiondetail != null" >
+        exceptionDetail,
+      </if>
+      <if test="createby != null" >
+        createBy,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="logid != null" >
+        #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="logtype != null" >
+        #{logtype,jdbcType=VARCHAR},
+      </if>
+      <if test="requestip != null" >
+        #{requestip,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptioncode != null" >
+        #{exceptioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptiondetail != null" >
+        #{exceptiondetail,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pethospitalmanagement.entity.Log" >
+    update t_log
+    <set >
+      <if test="logid != null" >
+        logId = #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="logtype != null" >
+        logType = #{logtype,jdbcType=VARCHAR},
+      </if>
+      <if test="requestip != null" >
+        requestIp = #{requestip,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptioncode != null" >
+        exceptionCode = #{exceptioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptiondetail != null" >
+        exceptionDetail = #{exceptiondetail,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pethospitalmanagement.entity.Log" >
+    update t_log
+    set logId = #{logid,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      logType = #{logtype,jdbcType=VARCHAR},
+      requestIp = #{requestip,jdbcType=VARCHAR},
+      exceptionCode = #{exceptioncode,jdbcType=VARCHAR},
+      exceptionDetail = #{exceptiondetail,jdbcType=VARCHAR},
+      createBy = #{createby,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectAllLogByPrimaryKey" resultMap="BaseResultMap" parameterType="com.example.pethospitalmanagement.entity.Log" >
+    select
+    <include refid="Base_Column_List" />
+    from t_log
+    where 1 = 1
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="logid != null" >
+      and logId = #{logid,jdbcType=VARCHAR}
+    </if>
+    <if test="description != null" >
+      and description like "%"#{description,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="method != null" >
+      and method = #{method,jdbcType=VARCHAR}
+    </if>
+    <if test="logtype != null" >
+      and logType = #{logtype,jdbcType=VARCHAR}
+    </if>
+    <if test="requestip != null" >
+      and requestIp = #{requestip,jdbcType=VARCHAR}
+    </if>
+    <if test="exceptioncode != null" >
+      and exceptionCode like "%"#{exceptioncode,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="exceptiondetail != null" >
+      and exceptionDetail like "%"#{exceptiondetail,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="createby != null" >
+      createBy = #{createby,jdbcType=VARCHAR}
+    </if>
+    <if test="createdate != null" >
+      createDate >= #{createdate,jdbcType=TIMESTAMP}
+    </if>
+    order by createDate desc
+  </select>
+</mapper>

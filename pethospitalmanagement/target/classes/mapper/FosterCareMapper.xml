@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.pethospitalmanagement.mapper.FosterCareMapper" >
+  <resultMap id="BaseResultMap" type="com.example.pethospitalmanagement.entity.FosterCare" >
+    <id column="fosterId" property="fosterid" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="petName" property="petname" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fosterId, userId, userName, petName, phone, startTime, endTime, createTime, details,state,evaluation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_fostercare
+    where fosterId = #{fosterid,jdbcType=VARCHAR}
+    order by createTime desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_fostercare
+    where fosterId = #{fosterid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.pethospitalmanagement.entity.FosterCare" >
+    insert into t_fostercare (fosterId, userId, userName,
+      petName, phone, startTime, endTime,createTime,
+      details,state)
+    values (#{fosterid,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{petname,jdbcType=VARCHAR}, {phone,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP},
+      #{endtime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, #{details,jdbcType=VARCHAR},
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pethospitalmanagement.entity.FosterCare" >
+    insert into t_fostercare
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fosterid != null" >
+        fosterId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="petname != null" >
+        petName,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fosterid != null" >
+        #{fosterid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="petname != null" >
+        #{petname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pethospitalmanagement.entity.FosterCare" >
+    update t_fostercare
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="petname != null" >
+        petName = #{petname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fosterId = #{fosterid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pethospitalmanagement.entity.FosterCare" >
+    update t_fostercare
+    set userId = #{userid,jdbcType=INTEGER},
+      userName = #{username,jdbcType=VARCHAR},
+      petName = #{petname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      details = #{details,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where fosterId = #{fosterid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateFosterCareEvaluation" parameterType="com.example.pethospitalmanagement.entity.FosterCare" >
+    update t_fostercare
+    <set>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluation != null" >
+        evaluation = #{evaluation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fosterId = #{fosterid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectAllFosterCareByPrimaryKeySelective" resultMap="BaseResultMap" parameterType="com.example.pethospitalmanagement.vo.FosterCareVo" >
+    select
+    <include refid="Base_Column_List" />
+    from t_fostercare
+    where 1 = 1
+    <if test="userid != null" >
+      and userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="username != null" >
+      and userName = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="fosterid != null" >
+      and fosterId like "%"#{fosterid,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="petname != null" >
+      and petName like "%"#{petname,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="phone != null" >
+      and phone like "%"#{phone,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="startTime_s != null" >
+      and startTime >= #{startTime_s,jdbcType=TIMESTAMP}
+    </if>
+    <if test="startTime_e != null" >
+      and startTime <![CDATA[<=]]> date_add(#{startTime_e,jdbcType=TIMESTAMP},interval 1 day)
+    </if>
+    <if test="endTime_s != null" >
+      and endTime >= #{endTime_s,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime_e != null" >
+      and endTime <![CDATA[<=]]> date_add(#{endTime_e,jdbcType=TIMESTAMP},interval 1 day)
+    </if>
+    <if test="createTime_s != null" >
+      and createTime >= #{createTime_s,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createTime_e != null" >
+      and createTime <![CDATA[<=]]> date_add(#{createTime_e,jdbcType=TIMESTAMP},interval 1 day)
+    </if>
+    <if test="details != null" >
+      and details like "%"#{details,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="state != null" >
+      and state = #{state,jdbcType=VARCHAR}
+    </if>
+    order by createTime desc
+  </select>
+</mapper>

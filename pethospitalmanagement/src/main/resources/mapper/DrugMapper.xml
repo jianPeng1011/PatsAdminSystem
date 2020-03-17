@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.pethospitalmanagement.mapper.DrugMapper" >
+  <resultMap id="BaseResultMap" type="com.example.pethospitalmanagement.entity.Drug" >
+    <id column="drugId" property="drugid" jdbcType="INTEGER" />
+    <result column="drugName" property="drugname" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="sl" property="sl" jdbcType="DECIMAL" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    drugId, drugName, unit, description, price, sl, money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_drug
+    where drugId = #{drugid,jdbcType=INTEGER}
+    order by drugId asc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_drug
+    where drugId = #{drugid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.pethospitalmanagement.entity.Drug" >
+    insert into t_drug (drugId, drugName, unit,
+      description, price, sl, 
+      money)
+    values (#{drugid,jdbcType=INTEGER}, #{drugname,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{sl,jdbcType=DECIMAL}, 
+      #{money,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pethospitalmanagement.entity.Drug" >
+    insert into t_drug
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="drugid != null" >
+        drugId,
+      </if>
+      <if test="drugname != null" >
+        drugName,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="sl != null" >
+        sl,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="drugid != null" >
+        #{drugid,jdbcType=INTEGER},
+      </if>
+      <if test="drugname != null" >
+        #{drugname,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="sl != null" >
+        #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pethospitalmanagement.entity.Drug" >
+    update t_drug
+    <set >
+      <if test="drugname != null" >
+        drugName = #{drugname,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="sl != null" >
+        sl = #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where drugId = #{drugid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.pethospitalmanagement.entity.Drug" >
+    update t_drug
+    set drugName = #{drugname,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      sl = #{sl,jdbcType=DECIMAL},
+      money = #{money,jdbcType=DECIMAL}
+    where drugId = #{drugid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllDrugByPrimaryKeySelective" resultMap="BaseResultMap" parameterType="com.example.pethospitalmanagement.entity.Drug" >
+    select
+    <include refid="Base_Column_List" />
+    from t_drug
+    where 1 = 1
+    <if test="drugid != null" >
+      and drugId = #{drugid,jdbcType=INTEGER}
+    </if>
+    <if test="drugname != null" >
+      and drugName like "%"#{drugname,jdbcType=VARCHAR}"%"
+    </if>
+    <if test="unit != null" >
+      and unit = #{unit,jdbcType=VARCHAR}
+    </if>
+    <if test="description != null" >
+      and description like "%"#{description,jdbcType=VARCHAR}"%"
+    </if>
+    order by drugId asc
+  </select>
+</mapper>
